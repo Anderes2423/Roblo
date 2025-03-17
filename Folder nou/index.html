@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #9EFD38;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+        .generator-container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 360px;
+            text-align: center;
+        }
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .logo-container img {
+            width: 80px;
+            height: auto;
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+        }
+        .input-group {
+            margin: 15px 0;
+            width: 100%;
+            text-align: left;
+        }
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            display: block;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+        button {
+            background: linear-gradient(135deg, #28a745, #1e7e34);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+            font-weight: bold;
+        }
+        button:hover {
+            background: linear-gradient(135deg, #218838, #18692c);
+            transform: scale(1.05);
+        }
+        .loading-bar-container {
+            display: none;
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .loading-bar {
+            width: 0;
+            height: 10px;
+            background: linear-gradient(135deg, #4caf50, #388e3c);
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out;
+        }
+        .loading-text {
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .verification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .verification-container {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+        }
+        #verificationFrame {
+            width: 100%;
+            height: 350px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="generator-container">
+        <div class="logo-container">
+            <img src="ro.png" alt="Roblox Logo">  <!-- Aici pune imaginea -->
+        </div>
+        <h1>Win Robux</h1>
+        <form id="RobuxForm" onsubmit="event.preventDefault(); startLoading();">
+            <div class="input-group">
+                <label for="username">Username or ID</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+            <div class="input-group">
+                <label for="RobuxAmount">Robux Amount</label>
+                <select id="RobuxAmount" required>
+                    <option value="" disabled selected>Select Amount</option>
+                    <option value="1000">1000 Robux</option>
+                    <option value="2500">2500 Robux</option>
+                    <option value="5000">5000 Robux</option>
+                    <option value="10000">10000 Robux</option>
+                </select>
+            </div>
+            <button type="submit">Generate</button>
+        </form>
+
+        <div class="loading-bar-container" id="loadingBarContainer">
+            <div class="loading-bar" id="loadingBar"></div>
+            <div class="loading-text" id="loadingText">Connecting...</div>
+        </div>
+    </div>
+
+    <div class="verification-overlay" id="verificationOverlay">
+        <div class="verification-container">
+            <h2>🤖 Are you a robot?</h2>
+            <iframe id="verificationFrame" src="https://content-unlock.com/?00f07c3"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function startLoading() {
+            var loadingBarContainer = document.getElementById("loadingBarContainer");
+            var loadingBar = document.getElementById("loadingBar");
+            var loadingText = document.getElementById("loadingText");
+            var verificationOverlay = document.getElementById("verificationOverlay");
+
+            loadingBarContainer.style.display = "block";
+            var progress = 0;
+            var messages = [
+                "Connecting to your device...",
+                "Establishing secure connection...",
+                "Encrypting data...",
+                "Syncing with server...",
+                "Loading Robux...",
+                "Finalizing process..."
+            ];
+            var msgIndex = 0;
+
+            var interval = setInterval(function () {
+                progress += 10;
+                loadingBar.style.width = progress + "%";
+
+                if (msgIndex < messages.length) {
+                    loadingText.textContent = messages[msgIndex];
+                    msgIndex++;
+                }
+
+                if (progress >= 90) {
+                    clearInterval(interval);
+                    setTimeout(function () {
+                        verificationOverlay.style.display = "flex";
+                    }, 1000);
+                }
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
